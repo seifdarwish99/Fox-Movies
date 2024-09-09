@@ -1,0 +1,116 @@
+<nav class="w-full top-0 fixed mx-auto py-2 z-40 bg-black bg-opacity-25">
+  <section class="w-[90%] mx-auto flex justify-between items-center">
+    <img
+      class="{{
+        menuIcon
+      }} lg:hidden text-[#ff0000] border border-[#ff0000] rounded-full p-3 z-50"
+      src=""
+      alt=""
+      (click)="openMenu()"
+    />
+    @if (!menuValue) {
+    <h1 routerLink="home" class="text-[#ff0000] text-4xl font-bold">
+      Fox Movies
+    </h1>
+    } @if (isLoggedIn){
+
+    <uL
+      class="justify-between space-x-5 text-lg text-white font-medium hidden lg:flex"
+    >
+      <li
+        class="hover:text-[#ff0] duration-150"
+        routerLink="AllFilms"
+        routerLinkActive="active"
+      >
+        {{ "navbar.movies" | translate }}
+      </li>
+      <li
+        class="hover:text-[#ff0] duration-150"
+        routerLink="actors"
+        routerLinkActive="active"
+      >
+        {{ "navbar.actors" | translate }}
+      </li>
+    </uL>
+    }
+    <ul class="text-white text-right space-x-5 hidden lg:flex">
+      <li>
+        <button
+          routerLink="login"
+          class="bg-blue-900 font-semibold py-1 px-3 rounded-md hover:brightness-90 duration-300"
+          (click)="changeLang('en')"
+        >
+          Eng
+        </button>
+      </li>
+      <li>
+        <button
+          routerLink="login"
+          class="bg-blue-900 font-semibold py-1 px-3 rounded-md hover:brightness-90 duration-300"
+          (click)="changeLang('deu')"
+        >
+          Deu
+        </button>
+      </li>
+      @if (!isLoggedIn) {
+
+      <button
+        routerLink="login"
+        class="bg-[#ff0000] font-semibold py-1 px-3 rounded-md hover:brightness-90 duration-300"
+      >
+        {{ "login.loginButton" | translate }}
+      </button>
+      } @if (isLoggedIn){
+
+      <button
+        (click)="logOut()"
+        class="bg-[#ff0000] font-semibold py-1 px-3 rounded-md hover:brightness-90 duration-300"
+      >
+        {{ "login.logoutButton" | translate }}
+      </button>
+      }
+    </ul>
+    <div class="lg:hidden"></div>
+  </section>
+  @if (menuValue) {
+  <div class="bg-black fixed top-0 w-full -z-20 h-screen">
+    <!-- <app-sidebar></app-sidebar> -->
+    <aside class="mt-20 w-[90%] mx-auto">
+      @for (card of cardsData; track card) {
+
+      <button
+        (click)="closeMenu()"
+        routerLinkActive="active"
+        routerLink="{{ card.sidebarRout }}"
+        class="w-full p-4 border-b text-left hover:text-[#ff0] duration-150"
+      >
+        <a>{{ card.name | translate }}</a>
+      </button>}
+      <button
+        (click)="changeLang('en')"
+        class="w-full p-4 text-blue-800 font-semibold border-b text-left hover:text-[#ff0] duration-150"
+      >
+        Eng
+      </button>
+      <button
+        (click)="changeLang('deu')"
+        class="w-full p-4 text-blue-800 font-semibold border-b text-left hover:text-[#ff0] duration-150"
+      >
+        Deu
+      </button>
+      @if (!isLoggedIn){
+      
+      <button (click)="closeMenu()" routerLink="login" class="w-full p-4 border-b text-[#ff0000] font-semibold text-left hover:text-[#ff0] duration-150">
+        {{ "login.loginButton" | translate }}
+      </button>
+      } @if (isLoggedIn){
+      
+      <button (click)="handleClick()" class="w-full p-4 border-b text-[#ff0000] font-semibold text-left hover:text-[#ff0] duration-150">
+        {{ "login.logoutButton" | translate }}
+      </button>
+      }
+    </aside>
+  </div>
+}
+  <p-toast />
+</nav>

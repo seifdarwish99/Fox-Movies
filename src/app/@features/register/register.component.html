@@ -1,0 +1,108 @@
+<section class="w-full relative flex">
+  <section
+    class="absolute top-[36%] left-[4%] md:left-[13%] w-[90%] md:w-3/4 lg:static my-auto space-y-6 text-center"
+  >
+    <div class="flex flex-col space-y-2">
+      <h1 class="text-2xl md:text-4xl font-bold mt-4">
+        {{ "register.creat" | translate }}
+      </h1>
+      <article class="flex justify-center space-x-2">
+        <p class="text-sm">{{ "register.subtittle" | translate }}</p>
+        <a routerLink="/login" class="text-[#ff0000] text-sm font-medium">{{
+          "register.signIn" | translate
+        }}</a>
+      </article>
+    </div>
+    <form
+      class="space-y-6 w-2/3 mx-auto"
+      [formGroup]="registerForm"
+      (ngSubmit)="submit()"
+    >
+      <section class="space-y-3">
+        <!-- Name -->
+        <fieldset class="flex justify-between w-full">
+          <span>{{ "register.fName" | translate }}</span>
+          <input
+            class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
+            type="text"
+            formControlName="Name"
+          />
+        </fieldset>
+        @if (registerForm.get('Name')?.invalid &&
+        registerForm.get('Name')?.touched) {
+
+        <span class="text-[#ff0000] font-medium">{{
+          "register.valid1" | translate
+        }}</span>
+        }
+        <!-- Email -->
+        <fieldset class="flex justify-between w-full">
+          <span>{{ "register.email" | translate }}</span>
+          <input
+            class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
+            type="text"
+            formControlName="email"
+          />
+        </fieldset>
+        @if (registerForm.get('email')?.invalid &&
+        registerForm.get('email')?.touched ) {
+        @if(registerForm.get('email')?.hasError('required')){
+
+        <span class="text-[#ff0000] font-medium">{{
+          "register.valid2" | translate
+        }}</span>
+        }
+        @if(registerForm.get('email')?.hasError('email')){
+
+          <span class="text-[#ff0000] font-medium">{{
+            "register.valid5" | translate
+          }}</span>
+          }
+         } @if (registerForm.get('email')?.touched &&
+        registerForm.get('email')?.errors?.['checkEmail'] &&
+        !registerForm.get('email')?.pending) {
+
+        <span class="text-[#ff0000] font-medium">{{
+          "register.valid4" | translate
+        }}</span>
+        }
+                <!-- Password -->
+        <fieldset class="flex justify-between w-full">
+          <span>{{ "register.pass" | translate }}</span>
+          <input
+            class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
+            type="password"
+            formControlName="password"
+          />
+        </fieldset>
+        @if (registerForm.get('password')?.invalid &&
+        registerForm.get('password')?.touched) {
+
+        <span class="text-[#ff0000] font-medium">{{
+          "register.valid3" | translate
+        }}</span>
+        }
+      </section>
+      <button
+        class="border border-[#ff0000] px-5 py-2 rounded-xl w-full hover:border-red-700 hover:bg-[#ff0000] duration-300"
+        type="submit"
+      >
+        {{ "register.register" | translate }}
+      </button>
+    </form>
+  </section>
+  <figure class="w-full hidden lg:block lg:w-1/2">
+    <img
+      class="h-screen object-cover w-full"
+      src="assets/images/spiderman.jpg"
+      alt=""
+    />
+  </figure>
+  <figure class="w-full lg:hidden lg:w-1/2">
+    <img
+      class="h-screen object-cover w-full"
+      src="assets/images/7.jpg"
+      alt=""
+    />
+  </figure>
+</section>

@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/index' as *;
+
+body{
+    @apply bg-black text-white cursor-pointer
+}
+
+::-webkit-scrollbar {
+    @apply w-3
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-black
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#ff0000] hover:bg-[#d50000]
+  }

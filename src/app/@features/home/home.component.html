@@ -1,0 +1,48 @@
+<div class="relative">
+  <img
+    class="w-full brightness-50 h-[100vh] object-cover"
+    src="assets/images/2.jpg"
+    alt=""
+  />
+</div>
+<div
+  class="absolute w-[80%] md:w-[60%] lg:w-[50%] xl:w-[32%] top-[35%] left-[12%] md:left-[23%] lg:left-[27%] xl:left-[33%] flex flex-col items-center space-y-4"
+>
+  <h1 class="text-4xl xl:text-5xl text-center font-extrabold">
+    {{ "home.mainTittle" | translate }}
+  </h1>
+  <span class="text-xl xl:text-2xl">{{ "home.subTittle" | translate }}</span>
+  @if(!isLoggedIn){
+  <span class="text-lg xl:text-2xl text-center">{{
+    "home.ready" | translate
+  }}</span>
+  <div class="w-full">
+    <form
+      [formGroup]="startForm"
+      (ngSubmit)="submit()"
+      class="w-full flex justify-between mb-2"
+    >
+      <input
+        class="w-[60%] bg-opacity-50 border border-white outline-none placeholder:text-white rounded-md p-4 bg-black"
+        placeholder="{{ 'home.entreMobile' | translate }}"
+        formControlName="mobile"
+        type="text"
+      />
+      <button
+        type="submit"
+        class="bg-[#ff0000] hover:brightness-75 duration-300 items-center w-[35%] rounded-md"
+      >
+        <span class="text-md md:text-lg xl:text-xl font-bold">{{
+          "home.start" | translate
+        }}</span>
+        <i class="pi pi-angle-right ml-2"></i>
+      </button>
+    </form>
+    @if (startForm.get('mobile')?.invalid && startForm.get('mobile')?.touched) {
+    <span class="text-[#ff0000] font-medium items-start">{{
+      "home.valid" | translate
+    }}</span>
+    }
+  </div>
+  }
+</div>

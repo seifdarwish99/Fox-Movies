@@ -1,0 +1,72 @@
+<section class="w-full relative flex">
+  <section
+    class="absolute top-[36%] left-[4%]  md:left-[13%] w-[90%] md:w-3/4 lg:static my-auto space-y-6 text-center"
+  >
+    <div class="flex flex-col space-y-2">
+      <h1 class="text-2xl md:text-4xl font-bold mt-4">
+        {{ "login.loginTittle" | translate }}
+      </h1>
+      <article class="flex justify-center space-x-2">
+        <p class="text-sm">{{ "login.subtittle" | translate }}</p>
+        <a routerLink="/register" class="text-[#ff0000] text-sm font-bold">{{
+          "register.register" | translate
+        }}</a>
+      </article>
+    </div>
+    <form
+      class="space-y-6 w-2/3 mx-auto mt-2"
+      [formGroup]="loginForm"
+      (ngSubmit)="submit()"
+    >
+      <section class="space-y-3">
+        <!-- Email -->
+        <fieldset class="flex justify-between w-full">
+          <span>{{ "register.email" | translate }}</span>
+          <input
+            class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
+            type="text"
+            formControlName="email"
+          />
+        </fieldset>
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched)
+        {
+
+        <span class="text-[#ff0000] font-medium">{{
+          "login.valid1" | translate
+        }}</span>
+        }
+
+        <!-- Password -->
+        <fieldset class="flex justify-between w-full">
+          <span>{{ "register.pass" | translate }}</span>
+          <input
+            class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
+            type="password"
+            formControlName="userPassword"
+          />
+        </fieldset>
+        @if (loginForm.get('userPassword')?.invalid &&
+        loginForm.get('userPassword')?.touched) {
+
+        <span class="text-[#ff0000] font-medium">{{
+          "login.valid2" | translate
+        }}</span>
+        }
+      </section>
+      <button
+        class="border border-[#ff0000] py-2 rounded-xl w-full hover:border-red-700 hover:bg-[#ff0000] duration-300"
+        type="submit"
+      >
+        {{ "login.loginButton" | translate }}
+      </button>
+    </form>
+    <p-toast />
+  </section>
+  <figure class="w-full lg:w-1/2">
+    <img
+      class="h-screen object-cover w-full"
+      src="assets/images/4.jpg"
+      alt=""
+    />
+  </figure>
+</section>

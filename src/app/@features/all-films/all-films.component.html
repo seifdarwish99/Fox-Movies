@@ -1,0 +1,25 @@
+<header
+  class=" text-white w-full fixed top-2 text-center mt-12 mx-auto py-lg-3 px-lg-8  bg-black bg-opacity-25 hidden lg:flex"
+>
+  <section class="w-fit mx-auto flex justify-between items-center">
+    <uL class="flex  justify-between space-x-5 text-lg text-white font-medium">
+      <li class="hover:text-[#ff0] duration-150" routerLink="movies" routerLinkActive="active">
+        {{ "navbar.movies" | translate }}
+      </li>
+
+      <li class="hover:text-[#ff0] duration-150" routerLink="topRated" routerLinkActive="active">
+        {{ "navbar.TopRated" | translate }}
+      </li>
+      <li class="hover:text-[#ff0] duration-150" routerLink="popular" routerLinkActive="active">
+        {{ "navbar.popular" | translate }}
+      </li>
+      <li class="hover:text-[#ff0] duration-150" routerLink="nowPlaying" routerLinkActive="active">
+        {{ "navbar.nowPlaying" | translate }}
+      </li>
+      <li class="hover:text-[#ff0] duration-150" routerLink="upComing" routerLinkActive="active">
+        {{ "navbar.upComing" | translate }}
+      </li>
+    </uL>
+  </section>
+</header>
+<router-outlet></router-outlet>

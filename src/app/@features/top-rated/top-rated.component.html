@@ -1,0 +1,10 @@
+<div class="mt-28 w-[95%] mx-auto ">
+    <section class="gap-x-3 gap-y-20 w-full grid grid-cols-3 lg:grid-cols-4 ">
+        @for (card of movies; track card) {
+            <div class="hover:scale-95 duration-300">
+                <img class="rounded-md border border-white h-full object-cover" [src]="imgPath+card.poster_path" alt="img">
+                <h6 class="text-white">{{card.original_title}}</h6>
+            </div>
+        }
+    </section>
+</div>
