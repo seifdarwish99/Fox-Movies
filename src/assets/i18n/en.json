@@ -19,7 +19,7 @@
   "register":{
     "creat":"Create Account",
     "subtittle":"Already have an account?",
-    "signIn":"Sign in",
+    "signIn":"Log in",
     "fName":"Full Name",
     "email": "Email",
     "pass":"Password",

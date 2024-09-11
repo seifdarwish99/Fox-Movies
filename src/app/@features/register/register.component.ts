@@ -48,12 +48,8 @@ export class RegisterComponent {
     const emailValue = control.value.trim().toLowerCase();
 
     return this.api.checkEmail(emailValue).pipe(
-      map((response: string) => {
-        if (response && response.length > 0) {
-          return { checkEmail: true };
-        } else {
-          return null;
-        }
+      map((response: boolean) => {
+        return response ? { checkEmail: true } : null;
       })
     );
   }
@@ -65,7 +61,8 @@ export class RegisterComponent {
       this.registerForm.markAllAsTouched();
       return;
     }
-    this.api.registerUser(this.registerForm.value).subscribe();
+    const {email , password} = this.registerForm.value
+    this.api.register(email as string, password as string).subscribe();
     this.router.navigate(['/login']);
   }
 }

@@ -46,7 +46,7 @@ export class LoginComponent {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('userPassword')?.value;
     this._api.getUserByEmail(email as string).subscribe((res) => {
-      if (res.length > 0 && res[0].password === password) {
+      if (res.length > 0 && res[0].password === password) {     
         this.router.navigate(['AllFilms/movies']);
         this._api.login();
       } else {
