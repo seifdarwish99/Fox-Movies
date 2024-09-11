@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject , Observable } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,16 +12,9 @@ export class ApiService {
   API_KEY = 'api_key=4b457a98b17afe2fa903e251697f7ee2';
   BASE_URL = 'https://api.themoviedb.org/3';
   API_URL = this.BASE_URL + '/discover/movie' + this.API_KEY;
-  private DB_URL = 'http://localhost:3000';
+  private readonly LOCAL_STORAGE_KEY = 'users';
 
   constructor(public _http: HttpClient) {}
-
-  // localStorage
-
-  private getInitialLoginState(): boolean {
-    const storedState = localStorage.getItem('isLoggedIn');
-    return storedState === 'true'; 
-  }
 
   // Movies
   getTrending(): Observable<any> {
@@ -56,14 +49,60 @@ export class ApiService {
 
   //Register and login
 
-  registerUser(userDetails: any): Observable<any> {
-    return this._http.post(`${this.DB_URL}/users`, userDetails);
+  register(email: string, password: string): Observable<string> {
+    return new Observable<string>((observer) => {
+      const users = this.getUsers();
+      const existingUser = users.find((user) => user.email === email);
+
+      if (existingUser) {
+        observer.error('Email already in use');
+      } else {
+        users.push({ email, password });
+        this.saveUsers(users);
+        observer.next('Registration successful');
+        observer.complete();
+      }
+    });
   }
 
-  getUserByEmail(email: string): Observable<any> {
-    return this._http.get(`${this.DB_URL}/users?email=${email}`);
+  private getUsers(): any[] {
+    const users = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    return users ? JSON.parse(users) : [];
   }
-  
+
+  private saveUsers(users: any[]): void {
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(users));
+  }
+
+  getUserByEmail(email: string): Observable<any[]> {
+    return new Observable<any[]>((observer) => {
+      const users = this.getUsers();
+      const user = users.filter((user) => user.email === email);
+
+      if (user.length > 0) {
+        observer.next(user);
+      } else {
+        observer.next([]);
+      }
+      observer.complete();
+    }).pipe(
+      catchError((error) => {
+        console.error('Error in getUserByEmail:', error);
+        return throwError(() => new Error('Error fetching user by email'));
+      })
+    );
+  }
+
+  checkEmail(email: string): Observable<boolean> {
+    return new Observable<boolean>((observer) => {
+      const users = this.getUsers();
+      const emailExists = users.some((user) => user.email === email);
+
+      observer.next(emailExists);
+      observer.complete();
+    });
+  }
+
   login() {
     this.isLogin.next(true);
     localStorage.setItem('isLoggedIn', 'true');
@@ -71,11 +110,13 @@ export class ApiService {
 
   logout() {
     this.isLogin.next(false);
-    localStorage.removeItem('isLoggedIn');    
+    localStorage.removeItem('isLoggedIn');
   }
+  
+  // localStorage
 
-
-  checkEmail(email: string): Observable<any> {
-    return this._http.get<any>(`${this.DB_URL}/users?email=${email}`);
+  private getInitialLoginState(): boolean {
+    const storedState = localStorage.getItem('isLoggedIn');
+    return storedState === 'true';
   }
 }

@@ -6,14 +6,14 @@
   />
 </div>
 <div
-  class="absolute w-[80%] md:w-[60%] lg:w-[50%] xl:w-[32%] top-[35%] left-[12%] md:left-[23%] lg:left-[27%] xl:left-[33%] flex flex-col items-center space-y-4"
+  class="absolute text-center w-[80%] md:w-[60%] lg:w-[50%] xl:w-[32%] top-[35%] left-[12%] md:left-[23%] lg:left-[27%] xl:left-[33%] flex flex-col items-center space-y-4"
 >
-  <h1 class="text-4xl xl:text-5xl text-center font-extrabold">
+  <h1 class="text-2xl sm:text-3xl lg:text-5xl font-extrabold">
     {{ "home.mainTittle" | translate }}
   </h1>
-  <span class="text-xl xl:text-2xl">{{ "home.subTittle" | translate }}</span>
+  <span class="sm:text-lg lg:text-2xl">{{ "home.subTittle" | translate }}</span>
   @if(!isLoggedIn){
-  <span class="text-lg xl:text-2xl text-center">{{
+  <span class="sm:text-lg lg:text-2xl">{{
     "home.ready" | translate
   }}</span>
   <div class="w-full">
@@ -23,19 +23,19 @@
       class="w-full flex justify-between mb-2"
     >
       <input
-        class="w-[60%] bg-opacity-50 border border-white outline-none placeholder:text-white rounded-md p-4 bg-black"
+        class="w-[60%] bg-opacity-50 border border-white outline-none placeholder:text-white text-xs sm:text-base rounded-md p-4 bg-black"
         placeholder="{{ 'home.entreMobile' | translate }}"
         formControlName="mobile"
         type="text"
       />
       <button
         type="submit"
-        class="bg-[#ff0000] hover:brightness-75 duration-300 items-center w-[35%] rounded-md"
+        class="bg-[#ff0000] flex justify-center items-center hover:brightness-75 duration-300 w-[35%] rounded-md"
       >
-        <span class="text-md md:text-lg xl:text-xl font-bold">{{
+        <span class="text-xs sm:text-lg xl:text-xl font-bold">{{
           "home.start" | translate
         }}</span>
-        <i class="pi pi-angle-right ml-2"></i>
+        <i class="pi pi-angle-right ml-2 "></i>
       </button>
     </form>
     @if (startForm.get('mobile')?.invalid && startForm.get('mobile')?.touched) {

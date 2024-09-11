@@ -26,6 +26,7 @@
             class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
             type="text"
             formControlName="Name"
+            autocomplete="userName"
           />
         </fieldset>
         @if (registerForm.get('Name')?.invalid &&
@@ -42,6 +43,7 @@
             class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
             type="text"
             formControlName="email"
+            autocomplete="userMail"
           />
         </fieldset>
         @if (registerForm.get('email')?.invalid &&
@@ -73,6 +75,7 @@
             class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
             type="password"
             formControlName="password"
+            autocomplete="userPass"
           />
         </fieldset>
         @if (registerForm.get('password')?.invalid &&

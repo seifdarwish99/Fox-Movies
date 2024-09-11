@@ -26,6 +26,7 @@
             class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
             type="text"
             formControlName="email"
+            autocomplete="userMail"
           />
         </fieldset>
         @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched)
@@ -43,6 +44,7 @@
             class="bg-transparent border border-white rounded-md w-2/3 text-center outline-none"
             type="password"
             formControlName="userPassword"
+            autocomplete="userPass"
           />
         </fieldset>
         @if (loginForm.get('userPassword')?.invalid &&
